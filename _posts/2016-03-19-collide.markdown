@@ -1,0 +1,185 @@
+---
+layout: post
+permalink: /:categories/:title.html
+title: 简单几何图形的碰撞检测
+published: true
+categories:
+tags:
+---
+
+前言
+====
+
+> 目前主流的游戏引擎cocos2dx,u3d,ue4都提供了强大的物理引擎，但功能的丰富意味着性能消耗。在实际应用中，并不需要
+那么多的功能，比如跑酷类游戏，为了用户体验，可能还需要做出一些不符合物理的情况。这篇文章记录我在游戏开发中所用
+到的碰撞方法。    
+
+准备条件
+====
+
+**实现代码**： ``Lua``      
+**坐标系**：``笛卡尔坐标系``    
+**几何数据结构：**        
+*圆形:*
+{% highlight lua %}
+-- x,y为圆心
+-- r为半径
+{x = 1.0,y = 1.0,r = 1.0}
+{% endhighlight %}
+*矩形：*
+{% highlight lua %}
+-- x,y为左下角坐标
+-- width,height为宽度和长度
+{x = 1.0,y = 1.0,width = 1.0, height = 1.0}
+{% endhighlight %}
+*旋转矩形：*
+{% highlight lua %}
+-- x,y为左下角坐标
+-- width,height为宽度和长度
+-- angle矩形逆时针的旋转角度
+{x = 1.0,y = 1.0,width = 1.0, height = 1.0, angle = 90}
+{% endhighlight %}
+圆与圆的碰撞
+====
+> 两圆心的距离大于半径和不相交，否则相交    
+{% highlight lua %}
+local function circleIntersectsCircle(circle1,circle2)
+    return  (circle1.x - circle2.x)^2 + (circle1.y - circle2.y)^2 < (circle1.r + circle2.r)^2
+end
+{% endhighlight %}
+![圆形X圆形]({{ site.baseurl }}/images/math/circleXcircle.gif)    
+
+矩形与矩形
+====
+> 意会一下    
+{% highlight lua %}
+local function rectIntersectsRect( rect1, rect2 )
+    local intersect = not ( rect1.x > rect2.x + rect2.width or
+        rect1.x + rect1.width < rect2.x or
+        rect1.y > rect2.y + rect2.height or
+        rect1.y + rect1.height < rect2.y)
+    return intersect
+end
+{% endhighlight %}
+![矩形X矩形]({{ site.baseurl }}/images/math/rectXrect.gif)    
+
+矩形与圆
+====
+> [理论基础](https://www.zhihu.com/question/24251545/answer/27184960)    
+
+{% highlight lua %}
+local function rectIntersectsCircle(rect,circle)
+    local v = {math.abs(circle.x - (rect.x + rect.width/2)),
+        math.abs(circle.y - (rect.y + rect.height/2)) }
+    local h = {rect.width/2,rect.height/2}
+    local u = {math.max(v[1]-h[1],0),math.max(v[2]-h[2],0)}
+    return u[1]*u[1] + u[2]*u[2] < circle.r*circle.r
+end
+{% endhighlight %}
+![矩形X圆形]({{ site.baseurl }}/images/math/rectXcircle.gif)    
+
+旋转矩形与圆
+====
+> 与前面相同，将圆形变化到矩形的坐标系，这里增加圆形的角度变化计算
+{% highlight lua %}
+local function rectIntersectsCircle(rect,circle)
+    local srcAngle = math.rad(rect.angle)
+    local rectCenterX = rect.x + rect.width / 2 * math.cos(srcAngle) + 
+                        rect.height / 2 * math.cos(srcAngle + math.pi / 2)
+    local rectCenterY = rect.y + rect.width / 2 * math.sin(srcAngle) + 
+                        rect.height / 2* math.sin(srcAngle + math.pi / 2)
+    local vectorX = circle.x - rectCenterX
+    local vectorY = circle.y - rectCenterY
+    local angle = math.atan2(rectCenterY - circle.y,rectCenterX - circle.x)
+    local angle = angle - math.rad(rect.angle)
+    local len = math.sqrt(vectorX^2 + vectorY^2)
+    local v = {math.abs(len * math.cos(angle)),math.abs(len * math.sin(angle))}
+    local h = {rect.width/2,rect.height/2}
+    local u = {math.max(v[1]-h[1],0),math.max(v[2]-h[2],0)}
+    return u[1]*u[1] + u[2]*u[2] < circle.r*circle.r
+end
+{% endhighlight %}
+![旋转矩形X圆形]({{ site.baseurl }}/images/math/rectAngleXcircle.gif)    
+
+额外内容
+====
+
+测试代码
+----
+{% highlight lua %}
+function MainScene:onCreate()
+    display.newSprite("MainSceneBg.jpg")
+        :move(display.center)
+        :addTo(self)
+    self.circle1 = cc.Sprite:create("circle.png")
+    :addTo(self)
+    :setPosition(cc.p(500,300))
+    -- self.circle2 = cc.Sprite:create("circle.png")
+    -- :addTo(self)
+    -- :setPosition(cc.p(620,300))
+    -- self.rect1 = cc.Sprite:create("rect.png")
+    -- :addTo(self)
+    -- :setPosition(cc.p(500,300))
+    -- :setAnchorPoint(cc.p(0,0))
+    self.rect2 = cc.Sprite:create("rect.png")
+    :addTo(self)
+    :setPosition(cc.p(620,300))
+    :setAnchorPoint(cc.p(0,0))
+    :setRotation(-45)
+    local label = cc.Label:createWithSystemFont("是否碰撞: true", "Arial", 48)
+    :align(display.CENTER, display.center)
+    :addTo(self)
+    local moveCallback = function(touch,event)
+        local target = event:getCurrentTarget()
+        local x,y   = target:getPosition()
+        local delta = touch:getDelta()
+        target:setPosition(x+delta.x,y+delta.y)
+        ------------------------------------------------------------------
+        -- 圆形与圆形测试用例
+        -- local x1,y1 = self.circle1:getPosition()
+        -- local x2,y2 = self.circle2:getPosition()
+        -- local circle1 = {x=x1,y=y1,r=50}
+        -- local circle2 = {x=x2,y=y2,r=50}
+        -- if circleIntersectsCircle(circle1,circle2) then
+        --     label:setString("是否碰撞: true")
+        -- else
+        --     label:setString("是否碰撞: false")
+        -- end
+        ------------------------------------------------------------------
+        -- 矩形与矩形的碰撞测试
+        -- local x1,y1 = self.rect1:getPosition()
+        -- local x2,y2 = self.rect2:getPosition()
+        -- local rect1 = {x=x1,y=y1,width = 180, height = 72}
+        -- local rect2 = {x=x2,y=y2,width = 180, height = 72}
+        -- if rectIntersectsRect(rect1,rect2) then
+        --     label:setString("是否碰撞: true")
+        -- else
+        --     label:setString("是否碰撞: false")
+        -- end
+        ------------------------------------------------------------------
+        -- 矩形与圆的碰撞测试
+        -- local x1,y1 = self.circle1:getPosition()
+        -- local x2,y2 = self.rect2:getPosition()
+        -- local circle1 = {x=x1,y=y1,r=50}
+        -- local rect2 = {x=x2,y=y2,width = 180, height = 72}
+        -- if rectIntersectsCircle(rect2,circle1) then
+        --     label:setString("是否碰撞: true")
+        -- else
+        --     label:setString("是否碰撞: false")
+        -- end
+        ------------------------------------------------------------------
+        -- 旋转矩形与圆的碰撞测试
+        local x1,y1 = self.circle1:getPosition()
+        local x2,y2 = self.rect2:getPosition()
+        local circle1 = {x=x1,y=y1,r=50}
+        local rect2 = {x=x2,y=y2,width = 180, height = 72,angle = 45}
+        if rectRotateIntersectsCircle(rect2,circle1) then
+            label:setString("是否碰撞: true")
+        else
+            label:setString("是否碰撞: false")
+        end
+    end
+    addTouchListener(self.circle1,nil,moveCallback)
+    addTouchListener(self.rect2,nil,moveCallback)
+end
+{% endhighlight %}
