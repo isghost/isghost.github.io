@@ -65,7 +65,7 @@ end
 
 矩形与圆
 ====
-> [理论基础](https://www.zhihu.com/question/24251545/answer/27184960)    
+> [理论基础](https://www.zhihu.com/question/24251545/answer/27184960){:target="_blank"}    
 
 {% highlight lua %}
 local function rectIntersectsCircle(rect,circle)
