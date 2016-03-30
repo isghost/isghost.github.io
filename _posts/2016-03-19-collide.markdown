@@ -3,8 +3,8 @@ layout: post
 permalink: /:categories/:title.html
 title: 简单几何图形的碰撞检测
 published: true
-categories:
-tags:
+categories: math
+tags: collide math
 ---
 
 前言
@@ -183,3 +183,5 @@ function MainScene:onCreate()
     addTouchListener(self.rect2,nil,moveCallback)
 end
 {% endhighlight %}
+
+就是这样。

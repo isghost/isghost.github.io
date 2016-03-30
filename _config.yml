@@ -8,7 +8,7 @@
 # Site settings
 title: ccyblog
 email: 810278677@qq.com
-description:  一个不务正业的游戏客户端开发者
+description:  一个不务正业的游戏开发者
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://www.ccyblog.com" # the base hostname & protocol for your site
 baseurl: ""
