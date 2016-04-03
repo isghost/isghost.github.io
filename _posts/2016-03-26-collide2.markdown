@@ -44,7 +44,7 @@ which the projection of the objects will not overlap.[证明传送门](http://ww
 如何判断投影是否相交?
 ===
 
-![投影图]({{ site.baseUrl }}/images/math/obb.png)    
+![投影图]({{ site.baseUrl }}/images/math/obb.jpg)    
 图片中的红线是矩形在轴上的投影，长度为L1,L2,黑色是两个矩形中心在轴上的投影,L3。黑色线段的两个端点必然在两条红色
 线段的中间。所以，(L1 + L2) < L3 时，投影不重叠，否则重叠。
 
