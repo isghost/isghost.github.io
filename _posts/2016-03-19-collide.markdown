@@ -112,62 +112,21 @@ function MainScene:onCreate()
         :move(display.center)
         :addTo(self)
     self.circle1 = cc.Sprite:create("circle.png")
-    :addTo(self)
-    :setPosition(cc.p(500,300))
-    -- self.circle2 = cc.Sprite:create("circle.png")
-    -- :addTo(self)
-    -- :setPosition(cc.p(620,300))
-    -- self.rect1 = cc.Sprite:create("rect.png")
-    -- :addTo(self)
-    -- :setPosition(cc.p(500,300))
-    -- :setAnchorPoint(cc.p(0,0))
+        :addTo(self)
+        :setPosition(cc.p(500,300))
     self.rect2 = cc.Sprite:create("rect.png")
-    :addTo(self)
-    :setPosition(cc.p(620,300))
-    :setAnchorPoint(cc.p(0,0))
-    :setRotation(-45)
+        :addTo(self)
+        :setPosition(cc.p(620,300))
+        :setAnchorPoint(cc.p(0,0))
+        :setRotation(-45)
     local label = cc.Label:createWithSystemFont("是否碰撞: true", "Arial", 48)
-    :align(display.CENTER, display.center)
-    :addTo(self)
+        :align(display.CENTER, display.center)
+        :addTo(self)
     local moveCallback = function(touch,event)
         local target = event:getCurrentTarget()
         local x,y   = target:getPosition()
         local delta = touch:getDelta()
         target:setPosition(x+delta.x,y+delta.y)
-        ------------------------------------------------------------------
-        -- 圆形与圆形测试用例
-        -- local x1,y1 = self.circle1:getPosition()
-        -- local x2,y2 = self.circle2:getPosition()
-        -- local circle1 = {x=x1,y=y1,r=50}
-        -- local circle2 = {x=x2,y=y2,r=50}
-        -- if circleIntersectsCircle(circle1,circle2) then
-        --     label:setString("是否碰撞: true")
-        -- else
-        --     label:setString("是否碰撞: false")
-        -- end
-        ------------------------------------------------------------------
-        -- 矩形与矩形的碰撞测试
-        -- local x1,y1 = self.rect1:getPosition()
-        -- local x2,y2 = self.rect2:getPosition()
-        -- local rect1 = {x=x1,y=y1,width = 180, height = 72}
-        -- local rect2 = {x=x2,y=y2,width = 180, height = 72}
-        -- if rectIntersectsRect(rect1,rect2) then
-        --     label:setString("是否碰撞: true")
-        -- else
-        --     label:setString("是否碰撞: false")
-        -- end
-        ------------------------------------------------------------------
-        -- 矩形与圆的碰撞测试
-        -- local x1,y1 = self.circle1:getPosition()
-        -- local x2,y2 = self.rect2:getPosition()
-        -- local circle1 = {x=x1,y=y1,r=50}
-        -- local rect2 = {x=x2,y=y2,width = 180, height = 72}
-        -- if rectIntersectsCircle(rect2,circle1) then
-        --     label:setString("是否碰撞: true")
-        -- else
-        --     label:setString("是否碰撞: false")
-        -- end
-        ------------------------------------------------------------------
         -- 旋转矩形与圆的碰撞测试
         local x1,y1 = self.circle1:getPosition()
         local x2,y2 = self.rect2:getPosition()
