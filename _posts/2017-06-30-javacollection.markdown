@@ -1,6 +1,6 @@
 ---
 layout: post
-permalink: /:categories/:collections.html
+permalink: /:categories/:title.html
 title: Java容器简介
 published: true
 categories:
