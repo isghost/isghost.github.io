@@ -1,0 +1,101 @@
+---
+layout: post
+permalink: /:categories/:title.html
+title: xxtea解密文件代码
+published: true
+categories:
+tags:
+---
+
+### xxtea加解密小工具
+
+## 目的
+
+破解安装包，得到key,sign后，每次都要打开vs调整参数，有些麻烦，写了一个运行时带参数的版本，使用起来方
+便多了
+
+## 参数说明
+	
+	默认一个参数是输入文件
+	-key -k 加密的Key
+	-sign -s 加密的sign
+	-out -o 输出的文件名称
+
+## 使用例子
+
+	D:\web\CTest\Release>CTest.exe launcher.zip -key sgsdfesdgr -sign edfrgdfrgh -out fuck.zip
+
+## 代码
+
+{% codeblock C++ %}
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include<string>
+#include<map>
+using namespace std;
+#include"xxtea.h"
+/*
+	-key -k
+	-sign -s
+	-out -o
+*/
+map<string, string> parseParams(int argc, char **argv){
+	map<string, string> result;
+	for (int i = 0; i < argc; i++){
+		if (strcmp(argv[i], "-key") == 0 || strcmp(argv[i], "-k") == 0){
+			result["key"] = argv[i + 1];
+			i++;
+		}
+		else if (strcmp(argv[i], "-sign") == 0 || strcmp(argv[i], "-s") == 0){
+			result["sign"] = argv[i + 1];
+			i++;
+		}
+		else if (strcmp(argv[i], "-out") == 0 || strcmp(argv[i], "-o") == 0){
+			result["out"] = argv[i + 1];
+			i++;
+		}
+		else{
+			result["in"] = argv[i];
+		}
+	}
+	if (result["out"] == ""){
+		result["out"] = "D" + result["in"];
+	}
+	return result;
+}
+int main(int argc, char **argv){
+	auto params = parseParams(argc, argv);
+	auto * fp = fopen(params["in"].c_str(), "rb");
+	if (fp == NULL){
+		printf("can't found  file");
+		return 0;
+	}
+	fseek(fp, 0L, SEEK_END); /* 定位到文件末尾 */
+	int flen = ftell(fp); /* 得到文件大小 */
+	unsigned char * p = (unsigned char *)malloc(flen + 1); /* 根据文件大小动态分配内存空间 */
+	if (p == NULL)
+	{
+		fclose(fp);
+		return 0;
+	}
+	fseek(fp, 0L, SEEK_SET); /* 定位到文件开头 */
+	fread(p, flen, 1, fp); /* 一次性读取全部文件内容 */
+	p[flen] = 0; /* 字符串结束标志 */
+	fclose(fp);
+	char key[256];// "sgsYpad7Lo0khJf";
+	strcpy(key, params["key"].c_str());
+	// char sign[] = "sgsEpadGsign28k";
+	 char sign[256];
+	 strcpy(sign, params["sign"].c_str());
+	 xxtea_long retLen = 0;
+	 p = xxtea_decrypt(p + strlen(sign), flen - strlen(sign), (unsigned char *)key, strlen(key), &retLen);
+	 fp = fopen(params["out"].c_str(), "wb");
+	 fwrite(p, retLen, 1, fp);
+	 fclose(fp);
+}
+{% endcodeblock %}
+
+## 二进制文件
+[下载xxtea.exe](http://pan.baidu.com/s/1qY2AmLm)
+
