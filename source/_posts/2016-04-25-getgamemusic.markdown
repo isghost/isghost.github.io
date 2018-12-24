@@ -1,6 +1,5 @@
 ---
 layout: post
-permalink: /:categories/:title.html
 title: 游戏音效获取方法
 published: true
 categories: game music

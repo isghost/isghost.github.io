@@ -1,6 +1,5 @@
 ---
 layout: post
-permalink: /:categories/:title.html
 title: 碰撞检测之OBB
 published: true
 categories: math

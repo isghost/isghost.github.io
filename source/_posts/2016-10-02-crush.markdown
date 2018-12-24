@@ -1,6 +1,5 @@
 ---
 layout: post
-permalink: /:categories/:title.html
 title: "开心消消乐开发计划"
 published: false
 categories:

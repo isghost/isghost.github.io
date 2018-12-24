@@ -1,6 +1,5 @@
 ---
 layout: post
-permalink: /:categories/:title.html
 title: python编码解析
 published: true
 categories:

@@ -1,6 +1,5 @@
 ---
 layout: post
-permalink: /:categories/:title.html
 title: 浅谈随机及其在游戏中的应用
 published: true
 categories:

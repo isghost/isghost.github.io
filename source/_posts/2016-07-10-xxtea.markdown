@@ -1,6 +1,5 @@
 ---
 layout: post
-permalink: /:categories/:title.html
 title: xxtea解密文件代码
 published: true
 categories:
