@@ -4,6 +4,7 @@ title: skynet学习记录
 published: false
 categories: server
 tags: skynet server
+date: 2016-04-09 00:00:00
 ---
 
 安装

@@ -4,6 +4,7 @@ title: 碰撞检测之OBB
 published: true
 categories: math
 tags: math collide
+date: 2016-03-26 00:00:00
 ---
 
 前言

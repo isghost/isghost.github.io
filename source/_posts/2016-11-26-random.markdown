@@ -4,6 +4,7 @@ title: 浅谈随机及其在游戏中的应用
 published: true
 categories:
 tags:
+date: 2016-11-26 00:00:00
 ---
 
 需求
