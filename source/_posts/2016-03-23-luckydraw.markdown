@@ -1,6 +1,5 @@
 ---
 layout: post
-permalink: /:categories/:title.html
 title: 游戏限时抽奖策略
 published: true
 categories: math

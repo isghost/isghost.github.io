@@ -1,6 +1,5 @@
 ---
 layout: post
-permalink: /:categories/:title.html
 title: 我在cocos官网发布的文章合集
 published: true
 categories: cocos

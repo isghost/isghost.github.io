@@ -1,6 +1,5 @@
 ---
 layout: post
-permalink: /:categories/:title.html
 title: VS2015无法Attach To Unity解决方案
 published: true
 categories:

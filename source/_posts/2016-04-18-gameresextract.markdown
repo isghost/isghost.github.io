@@ -1,6 +1,5 @@
 ---
 layout: post
-permalink: /:categories/:title.html
 title: 游戏资源提取方法合集
 published: true
 categories:
