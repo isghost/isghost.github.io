@@ -14,7 +14,7 @@ tags:
 1.饥荒
 ===
 
-![dontsarve]({{ site.base }}/images/resextract/dontstarve_2.jpg)
+![dontsarve](/images/resextract/dontstarve_2.jpg)
 
 饥荒的美术资源是没有加密过，但是是```tex```后缀，网上没找到这种格式的相关信息。我找到一个工具，可以
 将这种格式的资源转化为png，工具名称```ktool```.[百度网盘ktool下载地址](http://pan.baidu.com/s/1dEEN7dn)
@@ -30,7 +30,7 @@ tags:
 	)
 
 这个批处理会遍历所有的tex结尾的文件，将其转化为png。
-![dontsarve]({{ site.base }}/images/resextract/dontstarve.jpg)
+![dontsarve](/images/resextract/dontstarve.jpg)
 
 [百度网盘下载地址](http://pan.baidu.com/s/1dEEN7dn)，包含饥荒和饥荒dlc的资源
 
@@ -38,8 +38,8 @@ tags:
 
 2.拳皇98终极之战ol
 ===
-![拳皇98]({{ site.base }}/images/resextract/ko98.jpg)
+![拳皇98](/images/resextract/ko98.jpg)
 
 由于PNG图片的开头都是一样的。将拳皇的图片资源与普通图片对比，可以发现，除了开头二进制部分有一些不一样，替换成正常头部，就可以读取了。
 
-![拳皇98]({{ site.base }}/images/resextract/ko98_2.jpg)
+![拳皇98](/images/resextract/ko98_2.jpg)

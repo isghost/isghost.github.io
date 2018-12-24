@@ -16,6 +16,6 @@ FSB格式
 需要工具：FsbExtractor，[百度网盘下载地址](http://pan.baidu.com/s/1kVcslW7)
 使用方法
 
-![gif教程]({{ site.base }}/images/musicextract/fsbextract.gif)
+![gif教程](/images/musicextract/fsbextract.gif)
 
 例子：[天天爱消除音效下载](http://pan.baidu.com/s/1kVcslW7)

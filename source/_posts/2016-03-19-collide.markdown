@@ -47,7 +47,7 @@ local function circleIntersectsCircle(circle1,circle2)
     return  (circle1.x - circle2.x)^2 + (circle1.y - circle2.y)^2 < (circle1.r + circle2.r)^2
 end
 {% endcodeblock %}
-![圆形X圆形]({{ site.baseurl }}/images/math/circleXcircle.gif)    
+![圆形X圆形](/images/math/circleXcircle.gif)    
 
 矩形与矩形
 ====
@@ -61,7 +61,7 @@ local function rectIntersectsRect( rect1, rect2 )
     return intersect
 end
 {% endcodeblock %}
-![矩形X矩形]({{ site.baseurl }}/images/math/rectXrect.gif)    
+![矩形X矩形](/images/math/rectXrect.gif)    
 
 矩形与圆
 ====
@@ -76,7 +76,7 @@ local function rectIntersectsCircle(rect,circle)
     return u[1]*u[1] + u[2]*u[2] < circle.r*circle.r
 end
 {% endcodeblock %}
-![矩形X圆形]({{ site.baseurl }}/images/math/rectXcircle.gif)    
+![矩形X圆形](/images/math/rectXcircle.gif)    
 
 旋转矩形与圆
 ====
@@ -99,7 +99,7 @@ local function rectIntersectsCircle(rect,circle)
     return u[1]*u[1] + u[2]*u[2] < circle.r*circle.r
 end
 {% endcodeblock %}
-![旋转矩形X圆形]({{ site.baseurl }}/images/math/rectAngleXcircle.gif)    
+![旋转矩形X圆形](/images/math/rectAngleXcircle.gif)    
 
 额外内容
 ====

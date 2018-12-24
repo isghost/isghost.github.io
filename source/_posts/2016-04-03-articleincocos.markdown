@@ -19,7 +19,7 @@ tags: cocos
 ===
 第一篇文章已经是一年半以前，感慨万千，新人已成老司机，创业依旧未成    
 [伪立体菜单](http://blog.csdn.net/ccy0815ccy/article/details/41519767)    
-![pic1]({{ site.base }}/images/cocos/rotateMenu.gif)
+![pic1](/images/cocos/rotateMenu.gif)
 
 ---
 
@@ -27,7 +27,7 @@ tags: cocos
 ===
 因为弄了几张漂亮的图片，在官网的阅读量居然有几万，很长一段时间作为某个版块的封面 ^^    
 [LOL菜单](http://blog.csdn.net/ccy0815ccy/article/details/43924895)     
-![pic2]({{ site.base }}/images/cocos/lolMenu.gif)
+![pic2](/images/cocos/lolMenu.gif)
 
 ---
 
@@ -35,6 +35,6 @@ tags: cocos
 ===
 因为触控一直在力推js，于是用js写个小游戏感觉一下。写完之后不觉得哪里好...    
 [英雄难过棍子关](http://www.cocos.com/doc/tutorial/show?id=2943)    
-![pic3]({{ site.base }}/images/cocos/heroLevel.gif)
+![pic3](/images/cocos/heroLevel.gif)
 
 待补充...
