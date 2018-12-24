@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.bootcss.com/fancybox/3.5.6/jquery.fancybox.min.css" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.6.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.6.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.6.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.6.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="第一章 注册登录环境配置开发环境: 在正式开发之前，需要配置各种jar，具体内容参照github布署服务器：阿里云1核2G云主机，rmb1000，家里网络延迟超大，网络优化不行     开发中遇到的问题1、Mybatis的DAO不能够Autowire问题描述：使用@Autowire注解，IDE没有提示错误，一运行就提示找不到相应的Bean。原因：在这里StackOverFlow，大概意思是， my">
+<meta property="og:type" content="article">
+<meta property="og:title" content="小说开发-第一章-注册登录">
+<meta property="og:url" content="http://yoursite.com/2017/08/11/小说开发-第一章-注册登录.html">
+<meta property="og:site_name" content="isghost">
+<meta property="og:description" content="第一章 注册登录环境配置开发环境: 在正式开发之前，需要配置各种jar，具体内容参照github布署服务器：阿里云1核2G云主机，rmb1000，家里网络延迟超大，网络优化不行     开发中遇到的问题1、Mybatis的DAO不能够Autowire问题描述：使用@Autowire注解，IDE没有提示错误，一运行就提示找不到相应的Bean。原因：在这里StackOverFlow，大概意思是， my">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/images/novel/liucheng.png">
+<meta property="og:updated_time" content="2018-12-24T13:59:19.785Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="小说开发-第一章-注册登录">
+<meta name="twitter:description" content="第一章 注册登录环境配置开发环境: 在正式开发之前，需要配置各种jar，具体内容参照github布署服务器：阿里云1核2G云主机，rmb1000，家里网络延迟超大，网络优化不行     开发中遇到的问题1、Mybatis的DAO不能够Autowire问题描述：使用@Autowire注解，IDE没有提示错误，一运行就提示找不到相应的Bean。原因：在这里StackOverFlow，大概意思是， my">
+<meta name="twitter:image" content="http://yoursite.com/images/novel/liucheng.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/08/11/小说开发-第一章-注册登录.html">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>小说开发-第一章-注册登录 | isghost</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">isghost</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/11/小说开发-第一章-注册登录.html">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="isghost">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="isghost">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">小说开发-第一章-注册登录
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-08-11 00:00:00" itemprop="dateCreated datePublished" datetime="2017-08-11T00:00:00+08:00">2017-08-11</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-12-24 21:59:19" itemprop="dateModified" datetime="2018-12-24T21:59:19+08:00">2018-12-24</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="第一章-注册登录"><a href="#第一章-注册登录" class="headerlink" title="第一章 注册登录"></a>第一章 注册登录</h1><h2 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h2><p><strong>开发环境</strong>: 在正式开发之前，需要配置各种<code>jar</code>，具体内容参照<a href="https://github.com/isghost/Re-Novel" target="_blank" rel="noopener">github</a><br><strong>布署服务器</strong>：阿里云<code>1核2G</code>云主机，rmb<code>1000</code>，家里网络延迟超大，网络优化不行    </p>
+<h2 id="开发中遇到的问题"><a href="#开发中遇到的问题" class="headerlink" title="开发中遇到的问题"></a>开发中遇到的问题</h2><h4 id="1、Mybatis的DAO不能够Autowire"><a href="#1、Mybatis的DAO不能够Autowire" class="headerlink" title="1、Mybatis的DAO不能够Autowire"></a>1、<code>Mybatis</code>的<code>DAO</code>不能够<code>Autowire</code></h4><p><strong>问题描述</strong>：使用<code>@Autowire</code>注解，IDE没有提示错误，一运行就提示找不到相应的<code>Bean</code>。<br><strong>原因</strong>：在这里<a href="https://stackoverflow.com/questions/8999597/mybatis-spring-configuration-cant-autowire-mapper-beans" target="_blank" rel="noopener">StackOverFlow</a>，大概意思是， <code>mybatis</code>自动生成的<code>Bean</code>在<code>BeanDefinitionRegistryPostProcessor</code>中生成，无法被同个<code>WebApplicationContext</code>自动装备。<br><strong>解决办法</strong>：在这里<a href="https://stackoverflow.com/questions/35258758/getservletconfigclasses-vs-getrootconfigclasses-when-extending-abstractannot" target="_blank" rel="noopener">StackOverFlow</a>, 同一个层不能装配，下个层就可以了。把<code>mybatis</code>移动<code>RootConfig</code>即可</p>
+<h4 id="2、-使用JCaptcha默认难度过高"><a href="#2、-使用JCaptcha默认难度过高" class="headerlink" title="2、 使用JCaptcha默认难度过高"></a>2、 使用JCaptcha默认难度过高</h4><p><strong>问题描述</strong>：使用默认验证码，人都无法识别，而且很难看，特别丑。<br><strong>原因</strong>：与作者审美不同<br><strong>解决办法</strong>：重写<code>DefaultImageCaptchaEngine</code>。背景色使用渐变过渡，颜色<code>RGB</code>范围<code>[0,127]</code>。前景色<code>RGB</code>范围<code>[128,255]</code>。验证码数字范围<code>[0-9]</code>，数量固定四个。字体扭曲<code>TwistedAndSheared</code>。这样可以提高清晰度。详见<a href="https://github.com/isghost/Re-Novel/blob/master/src/main/java/www/ccyblog/novel/modules/account/service/SimpleImageCaptchaEngine.java" target="_blank" rel="noopener">SimpleImageCaptchaEngine</a><br><strong>剩余问题</strong>：过于清晰，容易被机器识别。据我观察，国内验证码，一般在这个基础上，加几条不规则的线，再加点花边,不影响人的识别，提高机器识别难度。    </p>
+<h4 id="3、Shiro配置出错"><a href="#3、Shiro配置出错" class="headerlink" title="3、Shiro配置出错"></a>3、Shiro配置出错</h4><p><strong>问题描述</strong>：按官方教程一路弄下来，到设置注解，突然不能运行。<br><strong>原因</strong>：要想开启<code>shiro</code>的注解，不能使用<code>shiro.ini</code>，要停止<code>shiro.ini</code>，在<code>web.xml</code>中不能用<code>EnvironmentLoaderListener</code><br><strong>解决办法</strong>：删除即可。    </p>
+<blockquote>
+<p>当仔细检查配置，发现没有遗漏，还不能正常运行时，那多半有东西多出来。</p>
+</blockquote>
+<h4 id="4、无法使用RESTFul（表现层状态转移"><a href="#4、无法使用RESTFul（表现层状态转移" class="headerlink" title="4、无法使用RESTFul（表现层状态转移)"></a>4、无法使用RESTFul（表现层状态转移)</h4><p><strong>问题描述</strong>:虽然书上有提示，需要添加依懒库，但不知道名字。<br><strong>解决办法</strong>：网上配置方式也是五花八门，尝试多种配置方式，始终不对，原因和上方相同，配置了多余的东西。实际只需要在<code>pom.xml</code>添加<code>jackson-core</code>和<code>jackson-databind</code>即可，无需其他操作。    </p>
+<h4 id="5、注册时，向服务端查询用户名是否可用的频率优化。"><a href="#5、注册时，向服务端查询用户名是否可用的频率优化。" class="headerlink" title="5、注册时，向服务端查询用户名是否可用的频率优化。"></a>5、注册时，向服务端查询用户名是否可用的频率优化。</h4><p><strong>问题描述</strong>：修改用户名时，需要即时向用户提醒用户是否可用，向服务端的查询频率不能过高。<br><strong>查询策略</strong>：<img src="/images/novel/liucheng.png" alt="流程图">    </p>
+<p>PS: <a href="https://github.com/isghost/Re-Novel" target="_blank" rel="noopener">源码地址</a></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/30/java容器简介.html" rel="next" title="Java容器简介">
+                <i class="fa fa-chevron-left"></i> Java容器简介
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/18/小说开发-第二章-图片收藏分享.html" rel="prev" title="小说开发-第二章-图片收藏分享">
+                小说开发-第二章-图片收藏分享 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">isghost</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">17</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">分类</span>
+                  
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">标签</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第一章-注册登录"><span class="nav-number">1.</span> <span class="nav-text">第一章 注册登录</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#环境配置"><span class="nav-number">1.1.</span> <span class="nav-text">环境配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开发中遇到的问题"><span class="nav-number">1.2.</span> <span class="nav-text">开发中遇到的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、Mybatis的DAO不能够Autowire"><span class="nav-number">1.2.0.1.</span> <span class="nav-text">1、Mybatis的DAO不能够Autowire</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、-使用JCaptcha默认难度过高"><span class="nav-number">1.2.0.2.</span> <span class="nav-text">2、 使用JCaptcha默认难度过高</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、Shiro配置出错"><span class="nav-number">1.2.0.3.</span> <span class="nav-text">3、Shiro配置出错</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、无法使用RESTFul（表现层状态转移"><span class="nav-number">1.2.0.4.</span> <span class="nav-text">4、无法使用RESTFul（表现层状态转移)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5、注册时，向服务端查询用户名是否可用的频率优化。"><span class="nav-number">1.2.0.5.</span> <span class="nav-text">5、注册时，向服务端查询用户名是否可用的频率优化。</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">isghost</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v6.6.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.bootcss.com/fancybox/3.5.6/jquery.fancybox.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.6.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.6.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.6.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.6.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.6.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
