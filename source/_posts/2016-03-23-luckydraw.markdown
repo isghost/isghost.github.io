@@ -4,6 +4,7 @@ title: 游戏限时抽奖策略
 published: true
 categories: math
 tags: normal distribution
+date: 2016-03-23 00:00:00
 ---
 
 前言

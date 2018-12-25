@@ -4,6 +4,7 @@ title: 游戏音效获取方法
 published: true
 categories: game music
 tags: music
+date: 2016-04-25 00:00:00
 ---
 
 前言
